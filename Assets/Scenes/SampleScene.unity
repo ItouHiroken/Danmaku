@@ -293,6 +293,8 @@ MonoBehaviour:
   _time: 0.28
   _howMany: 11
   _guruguruTime: 0
+  _happaTime: 0.1
+  _form: 1
 --- !u!4 &925483526
 Transform:
   m_ObjectHideFlags: 0
