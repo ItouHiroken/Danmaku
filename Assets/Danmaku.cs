@@ -35,15 +35,7 @@ public class Danmaku : MonoBehaviour
     {
         _gameTime += Time.deltaTime;
     }
-    enum CombatForm
-    {
-        Line,
-        LineAim,
-        LinePlural,
-        Guruguru,
-        Happa,
-        Prison,
-    }
+  
     void SummonPattern()
     {
         switch (_form)
@@ -160,4 +152,13 @@ public class Danmaku : MonoBehaviour
         yield return new WaitForSeconds(_prisonFormChangeIntervalTime);
         SummonPattern();
     }
+}
+enum CombatForm
+{
+    Line,
+    LineAim,
+    LinePlural,
+    Guruguru,
+    Happa,
+    Prison,
 }
