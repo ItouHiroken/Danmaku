@@ -154,9 +154,11 @@ public class DanmakuUpdating : MonoBehaviour
                     Rigidbody2D BulletQueenRB = BulletQueen.GetComponent<Rigidbody2D>();
                     
                     Vector3 Aim = (_player.transform.position - gameObject.transform.position).normalized;
-                    Debug.Log(Aim);
-                    BulletQueenRB.velocity = (new Vector3(Aim.x, 0, 0) * Mathf.Sin(Angle) +
-                                              new Vector3(0, Aim.y, 0) * Mathf.Cos(Angle)).normalized * _howEarly;
+                    Vector3 AimZ = new Vector3(0,0,1);
+                    Vector3 AimVertical = Vector3.Cross(Aim,AimZ);
+                   
+                    BulletQueenRB.velocity = (AimVertical * Mathf.Sin(Angle) +
+                                              Aim * Mathf.Cos(Angle)).normalized * _howEarly;
                     Destroy(BulletQueenRB, _whenDie);
                 }
                 yield return new WaitForSeconds(_lineRepeatInterval);
