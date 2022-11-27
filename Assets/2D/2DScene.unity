@@ -302,7 +302,6 @@ GameObject:
   m_Component:
   - component: {fileID: 925483526}
   - component: {fileID: 925483527}
-  - component: {fileID: 925483525}
   - component: {fileID: 925483524}
   m_Layer: 0
   m_Name: Summoner
@@ -363,30 +362,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &925483525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 925483523}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09420a5d22dc28e46a03eef13c6910a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _player: {fileID: 0}
-  _form: 0
-  _howMany: 6
-  _gameTime: 0.1
-  _lineFormChangeIntervalTime: 0.1
-  _lineRepeatIntervalTime: 0.1
-  _lineWay: 5
-  _lineWayAngle: 30
-  _guruguruFormChangeIntervalTime: 0.1
-  _happaFormChangeIntervalTime: 0.1
-  _prisonFormChangeIntervalTime: 0.1
-  _bullet: {fileID: 1040844623295689480, guid: a129ab1881241f34cb4b99fd95b12c03, type: 3}
 --- !u!4 &925483526
 Transform:
   m_ObjectHideFlags: 0
@@ -414,24 +389,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2868245c6d7a5d54daab9032adec0790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 948226622}
-  _form: 16
+  _form: 4
   _nowFormStart: 0
   _nowFormEnd: 0
   _howMany: 8
-  _lineFormChangeIntervalTime: 0.1
-  _lineRepeatIntervalTime: 0.05
+  _howEarly: 4.84
+  _whenDie: 10
+  _player: {fileID: 948226622}
+  _lineRepeatInterval: 0.05
   _lineRepeatTime: 6
   _lineWay: 5
   _lineWayAngle: 30
-  _guruguruFormChangeIntervalTime: 0.1
-  _guruguruRepeatIntervalTime: 0.05
+  _guruguruRepeatInterval: 0.05
   _guruguruRepeatTime: 50
-  _happaFormChangeIntervalTime: 0.1
-  _happaRepeatIntervalTime: 0.05
+  _happaRepeatInterval: 0.05
   _happaRepeatTime: 50
-  _prisonFormChangeIntervalTime: 0.1
-  _prisonRepeatIntervalTime: 0.05
+  _prisonRepeatInterval: 0.05
   _bullet: {fileID: 1040844623295689480, guid: a129ab1881241f34cb4b99fd95b12c03, type: 3}
 --- !u!1 &948226622
 GameObject:

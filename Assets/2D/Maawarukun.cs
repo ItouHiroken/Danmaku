@@ -20,7 +20,7 @@ public class Maawarukun : MonoBehaviour
     void Mawaaru()
     {
         Vector3 BokuToSummonerNoDistance = gameObject.transform.position - _summoner.transform.position;
-        Vector3 BokuNoZ = gameObject.transform.position + new Vector3(0, 0, 5);
+        Vector3 BokuNoZ = new Vector3(0, 0, 1);
 
         Vector3 BokuToSummonerNoVertical = Vector3.Cross(BokuToSummonerNoDistance, BokuNoZ).normalized;
 

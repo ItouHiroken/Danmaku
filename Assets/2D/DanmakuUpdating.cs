@@ -11,9 +11,10 @@ public class DanmakuUpdating : MonoBehaviour
         LineAim = 1 << 1,
         LinePlural = 1 << 2,
         LinePluralAim = 1 << 3,
-        Guruguru = 1 << 4,
-        Happa = 1 << 5,
-        Prison = 1 << 6,
+        GuruguruClockwise = 1 << 4,
+        GuruguruCounterClockwise = 1 << 5,
+        Happa = 1 << 6,
+        Prison = 1 << 7,
     }
     [Header("形態")]
     [Header("今の攻撃パターン")]
@@ -57,39 +58,44 @@ public class DanmakuUpdating : MonoBehaviour
         //    _gameTime += Time.deltaTime;
         if (_nowFormStart == _nowFormEnd)
         {
-            Invoke("SummonPattern", 0);
+            SummonPattern();
         }
     }
     void SummonPattern()
     {
         _nowFormStart = 0;
         _nowFormEnd = 0;
-        if (_form.HasFlag(CombatForm.Line))
+        if (_form.HasFlag(CombatForm.Line))//真下
         {
             StartCoroutine(LineSummonBullet());
             _nowFormStart++;
         }
-        if (_form.HasFlag(CombatForm.LineAim))
+        if (_form.HasFlag(CombatForm.LineAim))//自機狙い
         {
             StartCoroutine(LineAimSummonBullet());
             _nowFormStart++;
         }
-        if (_form.HasFlag(CombatForm.LinePlural))
+        if (_form.HasFlag(CombatForm.LinePlural))//何way
         {
             StartCoroutine(LinePluralSummonBullet());
             _nowFormStart++;
         }
-        if (_form.HasFlag(CombatForm.LinePluralAim))
+        if (_form.HasFlag(CombatForm.LinePluralAim))//何wayプラス自機狙い
         {
             StartCoroutine(LinePluralAimSummonBullet());
             _nowFormStart++;
         }
-        if (_form.HasFlag(CombatForm.Guruguru))
+        if (_form.HasFlag(CombatForm.GuruguruClockwise))//時計回り
         {
-            StartCoroutine(GuruguruSummonBullet());
+            StartCoroutine(GuruguruClockwiseSummonBullet());
             _nowFormStart++;
         }
-        if (_form.HasFlag(CombatForm.Happa))
+        if (_form.HasFlag(CombatForm.GuruguruCounterClockwise))//反時計回り
+        {
+            StartCoroutine(GuruguruCounterClockwiseSummonBullet());
+            _nowFormStart++;
+        }
+        if (_form.HasFlag(CombatForm.Happa))//葉っぱ
         {
             StartCoroutine(HappaSummonBullet());
             _nowFormStart++;
@@ -115,7 +121,6 @@ public class DanmakuUpdating : MonoBehaviour
             }
             yield return new WaitForSeconds(_lineRepeatInterval);
         }
-        //   yield return new WaitForSeconds(_lineFormChangeInterval);
         _nowFormEnd++;
     }
     IEnumerator LinePluralSummonBullet()
@@ -152,11 +157,11 @@ public class DanmakuUpdating : MonoBehaviour
                                 + k * (_lineWayAngle / (_lineWay - 1)) / 180 * Mathf.PI;
                     GameObject BulletQueen = Instantiate(_bullet, gameObject.transform.position, gameObject.transform.rotation);
                     Rigidbody2D BulletQueenRB = BulletQueen.GetComponent<Rigidbody2D>();
-                    
+
                     Vector3 Aim = (_player.transform.position - gameObject.transform.position).normalized;
-                    Vector3 AimZ = new Vector3(0,0,1);
-                    Vector3 AimVertical = Vector3.Cross(Aim,AimZ);
-                   
+                    Vector3 AimZ = new Vector3(0, 0, 1);
+                    Vector3 AimVertical = Vector3.Cross(Aim, AimZ);
+
                     BulletQueenRB.velocity = (AimVertical * Mathf.Sin(Angle) +
                                               Aim * Mathf.Cos(Angle)).normalized * _howEarly;
                     Destroy(BulletQueenRB, _whenDie);
@@ -165,7 +170,6 @@ public class DanmakuUpdating : MonoBehaviour
             }
             yield return new WaitForSeconds(_lineRepeatInterval);
         }
-        // yield return new WaitForSeconds(_lineFormChangeInterval);
         _nowFormEnd++;
     }
     IEnumerator LineAimSummonBullet()
@@ -179,10 +183,28 @@ public class DanmakuUpdating : MonoBehaviour
             Destroy(BulletQueen, _whenDie);
             yield return new WaitForSeconds(_lineRepeatInterval);
         }
-        // yield return new WaitForSeconds(_lineFormChangeInterval);
         _nowFormEnd++;
     }
-    IEnumerator GuruguruSummonBullet()
+    IEnumerator GuruguruClockwiseSummonBullet()
+    {
+        for (int i = 0; i < _guruguruRepeatTime; i++)
+        {
+            for (int j = 0; (2 * Mathf.PI / _howMany) * j < 2 * Mathf.PI; j++)
+            {
+                float Angle = (2 * Mathf.PI / _howMany) * j;
+                Debug.Log(Angle);
+                GameObject BulletQueen = Instantiate(_bullet, gameObject.transform.position, gameObject.transform.rotation);
+                Rigidbody2D BulletQueenRB = BulletQueen.GetComponent<Rigidbody2D>();
+                BulletQueen.transform.Rotate(new Vector3(0, 0, 1) * Mathf.Cos(Angle + i * _guruguruRepeatInterval) * 360);
+                BulletQueenRB.velocity = (new Vector3(1, 0, 0) * Mathf.Sin(Angle + i * _guruguruRepeatInterval)
+                                        + new Vector3(0, 1, 0) * Mathf.Cos(Angle + i * _guruguruRepeatInterval)).normalized * _howEarly;
+                Destroy(BulletQueen, _whenDie);
+            }
+            yield return new WaitForSeconds(_guruguruRepeatInterval);
+        }
+        _nowFormEnd++;
+    }
+    IEnumerator GuruguruCounterClockwiseSummonBullet()
     {
         for (int i = 0; i < _guruguruRepeatTime; i++)
         {
@@ -231,7 +253,6 @@ public class DanmakuUpdating : MonoBehaviour
             }
             yield return new WaitForSeconds(_happaRepeatInterval);
         }
-        //    yield return new WaitForSeconds(_happaFormChangeInterval);
         _nowFormEnd++;
     }
     IEnumerator PrisonSummonBullet()

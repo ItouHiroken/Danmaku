@@ -7,7 +7,7 @@ public class Danmaku : MonoBehaviour
     [Header("自機狙いの攻撃パターンのためにプレイヤーを取得")]
     [SerializeField] GameObject _player;
     [Header("形態")]
-    [SerializeField] CombatForm _form;
+    [SerializeField] ShotForm _form;
     /// <summary>360で割れる数字入れてほしい</summary>
     [Header("弾いくつ出したいか")]
     [SerializeField, Range(0, 20)] int _howMany;
@@ -40,22 +40,22 @@ public class Danmaku : MonoBehaviour
     {
         switch (_form)
         {
-            case CombatForm.Line:
+            case ShotForm.Line:
                 StartCoroutine(LineSummonBullet());
                 break;
-            case CombatForm.LineAim:
+            case ShotForm.LineAim:
                 StartCoroutine(LineAimSummonBullet());
                 break;
-            case CombatForm.LinePlural:
+            case ShotForm.LinePlural:
                 StartCoroutine(LinePluralSummonBullet());
                 break;
-            case CombatForm.Guruguru:
+            case ShotForm.Guruguru:
                 StartCoroutine(GuruguruSummonBullet());
                 break;
-            case CombatForm.Happa:
+            case ShotForm.Happa:
                 StartCoroutine(HappaSummonBullet());
                 break;
-            case CombatForm.Prison:
+            case ShotForm.Prison:
                 StartCoroutine(PrisonSummonBullet());
                 break;
         }
@@ -153,7 +153,7 @@ public class Danmaku : MonoBehaviour
         SummonPattern();
     }
 }
-enum CombatForm
+enum ShotForm
 {
     Line,
     LineAim,
