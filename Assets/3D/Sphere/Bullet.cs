@@ -1,27 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Bullet : MonoBehaviour
 {
-    public float XAcceleration { get => _xAcceletation; set => _xAcceletation = value; }
-    public float YAcceleration { get => _yAcceletation; set => _yAcceletation = value; }
-    public float ZAcceleration { get => _zAcceletation; set => _zAcceletation = value; }
+    public Vector3 Acceleration { get => _acceletation; set => _acceletation = value; }
+    [SerializeField] private Vector3 _acceletation = new Vector3(0, 0, 0);
 
-    [SerializeField] private float _xAcceletation = 0;
-    [SerializeField] private float _yAcceletation = 0;
-    [SerializeField] private float _zAcceletation = 0;
+    [SerializeField] GameManager _gameManager;
     Rigidbody _rigidBody;
+    float _time;
     private void Start()
     {
         _rigidBody = GetComponent<Rigidbody>();
+        _gameManager = FindObjectOfType<GameManager>();
+        _gameManager.BulletGameObject.Add(gameObject);
     }
     private void Update()
     {
-        _rigidBody.velocity = (new Vector3(_rigidBody.velocity.x + _xAcceletation,
-                                           _rigidBody.velocity.y + _yAcceletation,
-                                           _rigidBody.velocity.z + _zAcceletation)
-                              ).normalized*_rigidBody.velocity.magnitude;
+        _time += Time.deltaTime;
+        _rigidBody.velocity = (new Vector3( _acceletation.x * Mathf.Sin(_time) + _rigidBody.velocity.x ,
+                                            _acceletation.y * Mathf.Sin(_time) + _rigidBody.velocity.y ,
+                                            _acceletation.z * Mathf.Cos(_time) + _rigidBody.velocity.z)).normalized * _rigidBody.velocity.magnitude;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,6 +30,7 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             Destroy(gameObject);
+            _gameManager.BulletGameObject.Remove(gameObject);
         }
     }
 }

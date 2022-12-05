@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
+/// <summary>
+/// 角度覚えてほしい
+/// </summary>
 public class EnemyShot : MonoBehaviour
 {
     [Flags]
@@ -14,7 +17,7 @@ public class EnemyShot : MonoBehaviour
         GuruguruClockwise = 1 << 4,
         GuruguruCounterClockwise = 1 << 5,
         Happa = 1 << 6,
-        Prison = 1 << 7,
+        Wave = 1 << 7,
     }
     [Header("形態")]
     [Header("今の攻撃パターン")]
@@ -45,8 +48,8 @@ public class EnemyShot : MonoBehaviour
     [Header("葉っぱ形態")]
     [SerializeField, Range(0, 1)] float _happaRepeatInterval = 0.05f;
     [SerializeField, Range(0, 100)] float _happaRepeatTime = 50;
-    [Header("監獄形態")]
-    [SerializeField, Range(0, 1)] float _prisonRepeatInterval = 0.05f;
+    [Header("波形態")]
+    [SerializeField, Range(0, 1)] float _waveRepeatInterval = 0.05f;
     [Header("弾のプレハブ")]
     [SerializeField] GameObject _bullet;
     private void Update()
@@ -96,9 +99,9 @@ public class EnemyShot : MonoBehaviour
             StartCoroutine(HappaSummonBullet());
             _nowFormStart++;
         }
-        if (_form.HasFlag(CombatForm.Prison))
+        if (_form.HasFlag(CombatForm.Wave))
         {
-            StartCoroutine(PrisonSummonBullet());
+            StartCoroutine(WaveSummonBullet());
             _nowFormStart++;
         }
     }
@@ -108,7 +111,6 @@ public class EnemyShot : MonoBehaviour
         {
             for (int j = 0; j < _howMany; j++)
             {
-
                 GameObject BulletQueen = Instantiate(_bullet, gameObject.transform.position, gameObject.transform.rotation);
                 Rigidbody BulletQueenRB = BulletQueen.GetComponent<Rigidbody>();
                 BulletQueenRB.velocity = new Vector3(0, 0, 1).normalized * _howEarly;
@@ -152,9 +154,9 @@ public class EnemyShot : MonoBehaviour
                                 + k * (_lineWayAngle / (_lineWay - 1)) / 180 * Mathf.PI;
                     GameObject BulletQueen = Instantiate(_bullet, gameObject.transform.position, gameObject.transform.rotation);
                     Rigidbody BulletQueenRB = BulletQueen.GetComponent<Rigidbody>();
-
+                    /*単位円のXがAim、単位円のYがAimVertical*/
                     Vector3 Aim = (_player.transform.position - gameObject.transform.position).normalized;
-                    Vector3 AimZ = new Vector3(0, 1, 0);
+                    Vector3 AimZ = new(0, 1, 0);
                     Vector3 AimVertical = Vector3.Cross(Aim, AimZ);
 
                     BulletQueenRB.velocity = (AimVertical * Mathf.Sin(Angle) +
@@ -249,10 +251,10 @@ public class EnemyShot : MonoBehaviour
         }
         _nowFormEnd++;
     }
-    IEnumerator PrisonSummonBullet()
+    IEnumerator WaveSummonBullet()
     {
 
-        yield return new WaitForSeconds(_prisonRepeatInterval);
+        yield return new WaitForSeconds(_waveRepeatInterval);
         _nowFormEnd++;
     }
 }
