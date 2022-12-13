@@ -20,8 +20,8 @@ public class Bullet : MonoBehaviour
     private void Update()
     {
         _time += Time.deltaTime;
-        _rigidBody.velocity = (new Vector3( _acceletation.x * Mathf.Sin(_time) + _rigidBody.velocity.x ,
-                                            _acceletation.y * Mathf.Sin(_time) + _rigidBody.velocity.y ,
+        _rigidBody.velocity = (new Vector3(_acceletation.x * Mathf.Sin(_time) + _rigidBody.velocity.x,
+                                            _acceletation.y * Mathf.Sin(_time) + _rigidBody.velocity.y,
                                             _acceletation.z * Mathf.Cos(_time) + _rigidBody.velocity.z)).normalized * _rigidBody.velocity.magnitude;
     }
 
@@ -29,8 +29,7 @@ public class Bullet : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ground"))
         {
-            Destroy(gameObject);
-            _gameManager.BulletGameObject.Remove(gameObject);
+            gameObject.GetComponent<PooledObject>().Release();
         }
     }
 }

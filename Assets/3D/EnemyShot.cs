@@ -1,9 +1,9 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// Šp“xŠo‚¦‚Ä‚Ù‚µ‚¢
+/// è§’åº¦è¦šãˆã¦ã»ã—ã„
 /// </summary>
 public class EnemyShot : MonoBehaviour
 {
@@ -19,38 +19,38 @@ public class EnemyShot : MonoBehaviour
         Happa = 1 << 6,
         Wave = 1 << 7,
     }
-    [Header("Œ`‘Ô")]
-    [Header("¡‚ÌUŒ‚ƒpƒ^[ƒ“")]
+    [Header("å½¢æ…‹")]
+    [Header("ä»Šã®æ”»æ’ƒãƒ‘ã‚¿ãƒ¼ãƒ³")]
     [SerializeField] CombatForm _form;
-    [Header("UŒ‚ƒpƒ^[ƒ“‚¢‚­‚Ân‚Ü‚Á‚Ä‚éH")]
+    [Header("æ”»æ’ƒãƒ‘ã‚¿ãƒ¼ãƒ³ã„ãã¤å§‹ã¾ã£ã¦ã‚‹ï¼Ÿ")]
     [SerializeField] int _nowFormStart;
-    [Header("UŒ‚ƒpƒ^[ƒ“‚¢‚­‚ÂI‚í‚Á‚½H")]
+    [Header("æ”»æ’ƒãƒ‘ã‚¿ãƒ¼ãƒ³ã„ãã¤çµ‚ã‚ã£ãŸï¼Ÿ")]
     [SerializeField] int _nowFormEnd;
 
-    [Header("‘S•”‚ÉŠÖŒW‚·‚é‚±‚Æ")]
-    [Header("’e‚¢‚­‚Âo‚µ‚½‚¢‚©")]
+    [Header("å…¨éƒ¨ã«é–¢ä¿‚ã™ã‚‹ã“ã¨")]
+    [Header("å¼¾ã„ãã¤å‡ºã—ãŸã„ã‹")]
     [SerializeField, Range(0, 20)] int _howMany;
-    [Header("’e‚Ì‘¬‚³")]
+    [Header("å¼¾ã®é€Ÿã•")]
     [SerializeField, Range(0, 40)] float _howEarly;
-    [Header("’e‚Ì¶‘¶ŠÔ")]
+    [Header("å¼¾ã®ç”Ÿå­˜æ™‚é–“")]
     [SerializeField, Range(0, 20)] float _whenDie = 10;
-    [Header("©‹@‘_‚¢‚ÌUŒ‚ƒpƒ^[ƒ“‚Ì‚½‚ß‚ÉƒvƒŒƒCƒ„[‚ğæ“¾")]
+    [Header("è‡ªæ©Ÿç‹™ã„ã®æ”»æ’ƒãƒ‘ã‚¿ãƒ¼ãƒ³ã®ãŸã‚ã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’å–å¾—")]
     [SerializeField] GameObject _player;
 
-    [Header("’¼üŒ`‘Ô")]
+    [Header("ç›´ç·šå½¢æ…‹")]
     [SerializeField, Range(0, 1)] float _lineRepeatInterval = 0.05f;
     [SerializeField, Range(0, 20)] int _lineRepeatTime = 10;
     [SerializeField, Range(2, 10)] int _lineWay = 5;
     [SerializeField, Range(0, 180)] float _lineWayAngle = 30;
-    [Header("‚®‚é‚®‚éŒ`‘Ô")]
+    [Header("ãã‚‹ãã‚‹å½¢æ…‹")]
     [SerializeField, Range(0, 1)] float _guruguruRepeatInterval = 0.05f;
     [SerializeField, Range(0, 100)] float _guruguruRepeatTime = 50;
-    [Header("—t‚Á‚ÏŒ`‘Ô")]
+    [Header("è‘‰ã£ã±å½¢æ…‹")]
     [SerializeField, Range(0, 1)] float _happaRepeatInterval = 0.05f;
     [SerializeField, Range(0, 100)] float _happaRepeatTime = 50;
-    [Header("”gŒ`‘Ô")]
+    [Header("æ³¢å½¢æ…‹")]
     [SerializeField, Range(0, 1)] float _waveRepeatInterval = 0.05f;
-    [Header("’e‚ÌƒvƒŒƒnƒu")]
+    [Header("å¼¾ã®ãƒ—ãƒ¬ãƒãƒ–")]
     [SerializeField] GameObject _bullet;
     private void Update()
     {
@@ -64,37 +64,37 @@ public class EnemyShot : MonoBehaviour
     {
         _nowFormStart = 0;
         _nowFormEnd = 0;
-        if (_form.HasFlag(CombatForm.Line))//^‰º
+        if (_form.HasFlag(CombatForm.Line))//çœŸä¸‹
         {
             StartCoroutine(LineSummonBullet());
             _nowFormStart++;
         }
-        if (_form.HasFlag(CombatForm.LineAim))//©‹@‘_‚¢
+        if (_form.HasFlag(CombatForm.LineAim))//è‡ªæ©Ÿç‹™ã„
         {
             StartCoroutine(LineAimSummonBullet());
             _nowFormStart++;
         }
-        if (_form.HasFlag(CombatForm.LinePlural))//‰½way
+        if (_form.HasFlag(CombatForm.LinePlural))//ä½•way
         {
             StartCoroutine(LinePluralSummonBullet());
             _nowFormStart++;
         }
-        if (_form.HasFlag(CombatForm.LinePluralAim))//‰½wayƒvƒ‰ƒX©‹@‘_‚¢
+        if (_form.HasFlag(CombatForm.LinePluralAim))//ä½•wayãƒ—ãƒ©ã‚¹è‡ªæ©Ÿç‹™ã„
         {
             StartCoroutine(LinePluralAimSummonBullet());
             _nowFormStart++;
         }
-        if (_form.HasFlag(CombatForm.GuruguruClockwise))//Œv‰ñ‚è
+        if (_form.HasFlag(CombatForm.GuruguruClockwise))//æ™‚è¨ˆå›ã‚Š
         {
             StartCoroutine(GuruguruClockwiseSummonBullet());
             _nowFormStart++;
         }
-        if (_form.HasFlag(CombatForm.GuruguruCounterClockwise))//”½Œv‰ñ‚è
+        if (_form.HasFlag(CombatForm.GuruguruCounterClockwise))//åæ™‚è¨ˆå›ã‚Š
         {
             StartCoroutine(GuruguruCounterClockwiseSummonBullet());
             _nowFormStart++;
         }
-        if (_form.HasFlag(CombatForm.Happa))//—t‚Á‚Ï
+        if (_form.HasFlag(CombatForm.Happa))//è‘‰ã£ã±
         {
             StartCoroutine(HappaSummonBullet());
             _nowFormStart++;
@@ -154,7 +154,7 @@ public class EnemyShot : MonoBehaviour
                                 + k * (_lineWayAngle / (_lineWay - 1)) / 180 * Mathf.PI;
                     GameObject BulletQueen = Instantiate(_bullet, gameObject.transform.position, gameObject.transform.rotation);
                     Rigidbody BulletQueenRB = BulletQueen.GetComponent<Rigidbody>();
-                    /*’PˆÊ‰~‚ÌX‚ªAimA’PˆÊ‰~‚ÌY‚ªAimVertical*/
+                    /*å˜ä½å††ã®XãŒAimã€å˜ä½å††ã®YãŒAimVertical*/
                     Vector3 Aim = (_player.transform.position - gameObject.transform.position).normalized;
                     Vector3 AimZ = new(0, 1, 0);
                     Vector3 AimVertical = Vector3.Cross(Aim, AimZ);
@@ -223,7 +223,7 @@ public class EnemyShot : MonoBehaviour
     {
         for (int i = 0; i < _happaRepeatTime; i++)
         {
-            ////‚±‚ê‚ªŒv‰ñ‚è
+            ////ã“ã‚ŒãŒæ™‚è¨ˆå›ã‚Š
             for (int j = 0; (2 * Mathf.PI / _howMany) * j < 2 * Mathf.PI; j++)
             {
                 float Angle = (2 * Mathf.PI / _howMany) * j;
@@ -235,7 +235,7 @@ public class EnemyShot : MonoBehaviour
                                         new Vector3(0, 0, 1) * Mathf.Cos(Angle + i * _happaRepeatInterval + Mathf.PI / 2 * i)).normalized * _howEarly;
                 Destroy(BulletChan, _whenDie);
             }
-            //‚±‚ê‚Í”½Œv‰ñ‚è
+            //ã“ã‚Œã¯åæ™‚è¨ˆå›ã‚Š
             for (int j = 0; (2 * Mathf.PI / _howMany) * j < 2 * Mathf.PI; j++)
             {
                 float Angle = (2 * Mathf.PI / _howMany) * j;

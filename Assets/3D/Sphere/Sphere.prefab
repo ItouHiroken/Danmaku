@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: -5635385538856527834}
   - component: {fileID: -5617801926637214189}
   - component: {fileID: 3442932398483612720}
+  - component: {fileID: 2052428726635297472}
+  - component: {fileID: 5194382009509685127}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -128,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8243dbb21b511f444ae9c7719b37c884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _acceletation: {x: 0, y: -5, z: 0}
+  _acceletation: {x: 0, y: 0, z: 0}
   _gameManager: {fileID: 0}
 --- !u!96 &3442932398483612720
 TrailRenderer:
@@ -181,7 +183,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.37974638
+        value: 0.28218168
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -202,7 +204,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 1, g: 0, b: 0, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -238,3 +240,27 @@ TrailRenderer:
   m_MinVertexDistance: 0.03
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &2052428726635297472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806137087317705372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 451a39bf372c45f43bfecd0b7af18680, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5194382009509685127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806137087317705372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb8c146e09ba409ca14e15ea912a5d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

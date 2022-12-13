@@ -6,7 +6,7 @@ using Overdose.Data;
 /// <summary>
 /// Bulletのオブジェクトプールを管理するスクリプト
 /// </summary>
-public class ObjectPool : SingletonMonoBehaviour<ObjectPool>
+public class aObjectPool : SingletonMonoBehaviour<ObjectPool>
 {
     [SerializeField]
     private ObjectsPoolData _objectPoolData = default;
